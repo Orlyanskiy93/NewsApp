@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol NewsService {
-    
+    func getChannels() -> Promise<[Channel]>
+    func addToFavorites(_ chanel: Channel)
+    func removeFromFavorites(_ chanel: Channel)
 }

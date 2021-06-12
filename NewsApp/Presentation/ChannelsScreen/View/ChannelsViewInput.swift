@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol ChannelsViewInput {
+protocol ChannelsViewInput: AnyObject {
     func setupInitialState()
+    func update(_ channels: [Channel])
 }

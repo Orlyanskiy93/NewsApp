@@ -12,11 +12,12 @@ import PromiseKit
 
 class NewsServiceImp: NewsService {
     static let shared = NewsServiceImp()
-    var news = [NewsItem]()
+    var channels: [Channel] = []
+    var favoriteChanels: [Channel] = []
     
     private init() {}
     
-    func getNews() -> Promise<[NewsItem]> {
+    func getChannels() -> Promise<[Channel]> {
         let url = URL(string: "https://newsapi.org/v2/top-headlines")!
         let parametrs: Parameters = ["country": "gb", "apiKey": "33acadaeee364278bd34dfdf5009711b"]
         
@@ -29,8 +30,23 @@ class NewsServiceImp: NewsService {
                         return
                     }
                     do {
-                        let news = try Mapper<NewsItem>().mapArray(JSONObject: array)
-                        seal.fulfill(news)
+                        var newsData = try Mapper<NewsDataItem>().mapArray(JSONObject: array)
+                        var channels = [Channel]()
+                        var news = [NewsItem]()
+
+                        newsData.sort { $0.source < $1.source }
+                        var channelTitle = newsData.first!.source
+                        newsData.forEach { item in
+                            if item.source == channelTitle {
+                                news.append(NewsItem(title: item.title, description: item.description, imageUrlString: item.imageUrlString))
+                            } else {
+                                let channel = Channel(title: channelTitle, news: news)
+                                channels.append(channel)
+                                news = []
+                                channelTitle = item.source
+                            }
+                        }
+                        seal.fulfill(channels)
                     } catch {
                         seal.reject(error)
                     }
@@ -39,6 +55,19 @@ class NewsServiceImp: NewsService {
                 }
             }
         }
-        
+    }
+    
+    func addToFavorites(_ chanel: Channel) {
+        guard favoriteChanels.contains(where: { $0.title == chanel.title }) else {
+            favoriteChanels.append(chanel)
+            return
+        }
+    }
+    
+    func removeFromFavorites(_ chanel: Channel) {
+        guard let index = favoriteChanels.firstIndex(where: { $0.title == chanel.title }) else {
+            return
+        }
+        favoriteChanels.remove(at: index)
     }
 }

@@ -6,15 +6,31 @@
 //
 
 import Foundation
+import PromiseKit
 
 class ChannelsPresenter: ChannelsViewOutput {
-    private var view: ChannelsViewInput!
+    private weak var view: ChannelsViewInput!
+    private var newsService: NewsService!
     
     init(_ view: ChannelsViewInput) {
         self.view = view
+        newsService = NewsServiceImp.shared
     }
     
     func viewIsReady() {
         view.setupInitialState()
+        loadNews()
     }
+    
+    func loadNews() {
+        firstly {
+            newsService.getChannels()
+        } .done { [weak self] channels in
+            self?.view.update(channels)
+        } .catch { error in
+            print(error)
+        }
+    }
+    
+    
 }
