@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="-1009" y="889"/>
         </scene>
-        <!--View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="aGt-s1-9Xl">
             <objects>
-                <viewController id="4ue-d8-3UG" sceneMemberID="viewController">
+                <viewController id="4ue-d8-3UG" customClass="FavoritesViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Koh-ER-TvS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,20 +62,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="X77-HR-6Kf">
-                        <barButtonItem key="rightBarButtonItem" title="Show news" id="Cpm-V0-Mxc"/>
+                        <barButtonItem key="rightBarButtonItem" title="Show news" id="Cpm-V0-Mxc">
+                            <connections>
+                                <segue destination="NXL-NN-k6G" kind="show" id="Kod-cI-qvW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="NXL-NN-k6G" kind="show" id="eiE-H5-hu2"/>
+                        <outlet property="tableView" destination="Nc8-J2-dq3" id="yp8-eB-wmL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBm-TC-0Wn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19" y="1644"/>
         </scene>
-        <!--View Controller-->
+        <!--News View Controller-->
         <scene sceneID="J0U-jW-aV7">
             <objects>
-                <viewController id="NXL-NN-k6G" sceneMemberID="viewController">
+                <viewController id="NXL-NN-k6G" customClass="NewsViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W1u-pX-zLg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,6 +99,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FEs-B5-G2S"/>
+                    <connections>
+                        <outlet property="tableView" destination="g5H-Sp-SsD" id="ufl-hl-TGX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chh-QK-hIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

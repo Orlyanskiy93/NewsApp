@@ -24,7 +24,7 @@ class ChannelsPresenter: ChannelsViewOutput {
     
     func loadNews() {
         firstly {
-            newsService.getChannels()
+            newsService.getAllChannels()
         } .done { [weak self] channels in
             self?.view.update(channels)
         } .catch { error in

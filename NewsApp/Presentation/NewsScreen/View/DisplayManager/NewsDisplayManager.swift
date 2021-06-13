@@ -1,15 +1,15 @@
 //
-//  ChannelsDisplayManager.swift
+//  NewsDisplayManager.swift
 //  NewsApp
 //
-//  Created by Дмитрий Орлянский on 12.06.2021.
+//  Created by Дмитрий Орлянский on 13.06.2021.
 //
 
 import UIKit
 
-class ChannelsDisplayManager: NSObject, UITableViewDelegate {
+class NewsDisplayManager: NSObject, UITableViewDelegate {
     var tableView: UITableView!
-    var channels: [Channel] = []
+    var news: [NewsItem] = []
     {
         didSet {
             tableView.reloadData()
@@ -23,30 +23,28 @@ class ChannelsDisplayManager: NSObject, UITableViewDelegate {
     }
     
     func setupTableView() {
-        tableView.register(ChannelsTableViewCell.nib(), forCellReuseIdentifier: ChannelsTableViewCell.identifier())
+        tableView.register(NewsTableViewCell.nib(), forCellReuseIdentifier: NewsTableViewCell.identifier())
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 300
         tableView.separatorStyle = .none
-    }
-    
-    func reloadData() {
-        tableView.reloadData()
     }
 }
 
-extension ChannelsDisplayManager: UITextViewDelegate, UITableViewDataSource {
+extension NewsDisplayManager: UITextViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
+        return news.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChannelsTableViewCell.identifier()) as! ChannelsTableViewCell
-        let channel = channels[indexPath.row]
-        cell.fill(with: channel)
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier()) as! NewsTableViewCell
+        let newsItem = news[indexPath.row]
+        cell.fill(with: newsItem)
         return cell
     }
 }
+

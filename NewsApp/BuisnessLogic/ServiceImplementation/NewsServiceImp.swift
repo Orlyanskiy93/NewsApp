@@ -12,12 +12,11 @@ import PromiseKit
 
 class NewsServiceImp: NewsService {
     static let shared = NewsServiceImp()
-    var channels: [Channel] = []
-    var favoriteChanels: [Channel] = []
+    var favoriteChannels: [Channel] = []
     
     private init() {}
     
-    func getChannels() -> Promise<[Channel]> {
+    func getAllChannels() -> Promise<[Channel]> {
         let url = URL(string: "https://newsapi.org/v2/top-headlines")!
         let parametrs: Parameters = ["country": "gb", "apiKey": "33acadaeee364278bd34dfdf5009711b"]
         
@@ -56,18 +55,17 @@ class NewsServiceImp: NewsService {
             }
         }
     }
-    
     func addToFavorites(_ chanel: Channel) {
-        guard favoriteChanels.contains(where: { $0.title == chanel.title }) else {
-            favoriteChanels.append(chanel)
+        guard favoriteChannels.contains(where: { $0.title == chanel.title }) else {
+            favoriteChannels.append(chanel)
             return
         }
     }
     
     func removeFromFavorites(_ chanel: Channel) {
-        guard let index = favoriteChanels.firstIndex(where: { $0.title == chanel.title }) else {
+        guard let index = favoriteChannels.firstIndex(where: { $0.title == chanel.title }) else {
             return
         }
-        favoriteChanels.remove(at: index)
+        favoriteChannels.remove(at: index)
     }
 }

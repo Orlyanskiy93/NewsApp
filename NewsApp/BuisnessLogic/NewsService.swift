@@ -9,7 +9,9 @@ import Foundation
 import PromiseKit
 
 protocol NewsService {
-    func getChannels() -> Promise<[Channel]>
+    var favoriteChannels: [Channel] { get }
+    
+    func getAllChannels() -> Promise<[Channel]>
     func addToFavorites(_ chanel: Channel)
     func removeFromFavorites(_ chanel: Channel)
 }

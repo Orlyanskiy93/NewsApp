@@ -8,8 +8,9 @@
 import UIKit
 
 class ChannelsTableViewCell: UITableViewCell {
-    static let identifier: String = "ChannelsTableViewCell"
     @IBOutlet weak var favoritesImageView: UIImageView!
+    
+    var sourceDisplayManager: DisplayManager?
     private var channel: Channel!
     private var newsService: NewsService!
     private var starImage: UIImage = UIImage(systemName: "star") ?? UIImage()
@@ -45,6 +46,7 @@ class ChannelsTableViewCell: UITableViewCell {
             channel.isFavorte = false
             newsService.removeFromFavorites(channel)
             favoritesImageView.image = starImage
+            sourceDisplayManager?.delete(self)
         } else {
             channel.isFavorte = true
             newsService.addToFavorites(channel)
