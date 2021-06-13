@@ -9,5 +9,7 @@ import Foundation
 
 protocol ChannelsViewInput: AnyObject {
     func setupInitialState()
+    func startLoading()
+    func stopLoading()
     func update(_ channels: [Channel])
 }

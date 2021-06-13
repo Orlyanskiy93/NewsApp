@@ -9,6 +9,7 @@ import UIKit
 
 class ChannelsViewController: UIViewController, ChannelsViewInput {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var sourceTableView: UITableView?
     
     private var output: ChannelsViewOutput!
@@ -27,6 +28,18 @@ class ChannelsViewController: UIViewController, ChannelsViewInput {
     
     func setupInitialState() {
         displayManager = ChannelsDisplayManager(tableView)
+        activityIndicator.hidesWhenStopped = true
+        tableView.isHidden = true
+    }
+    
+    func startLoading() {
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
+    }
+    
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+        tableView.isHidden = false
     }
     
     func update(_ channels: [Channel]) {

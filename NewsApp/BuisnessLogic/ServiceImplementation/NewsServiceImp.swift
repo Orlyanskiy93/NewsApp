@@ -12,6 +12,7 @@ import PromiseKit
 
 class NewsServiceImp: NewsService {
     static let shared = NewsServiceImp()
+    var allChannels: [Channel] = []
     var favoriteChannels: [Channel] = []
     
     private init() {}
@@ -45,6 +46,7 @@ class NewsServiceImp: NewsService {
                                 channelTitle = item.source
                             }
                         }
+                        self.allChannels = channels
                         seal.fulfill(channels)
                     } catch {
                         seal.reject(error)

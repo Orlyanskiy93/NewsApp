@@ -23,10 +23,12 @@ class ChannelsPresenter: ChannelsViewOutput {
     }
     
     func loadNews() {
+        view.startLoading()
         firstly {
             newsService.getAllChannels()
         } .done { [weak self] channels in
             self?.view.update(channels)
+            self?.view.stopLoading()
         } .catch { error in
             print(error)
         }

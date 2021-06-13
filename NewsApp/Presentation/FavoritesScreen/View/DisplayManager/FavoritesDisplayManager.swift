@@ -35,7 +35,7 @@ class FavoritesDisplayManager: NSObject, DisplayManager {
         }
         tableView.beginUpdates()
         favoriteChannels.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
+        tableView.deleteRows(at: [indexPath], with: .middle)
         tableView.endUpdates()
     }
     

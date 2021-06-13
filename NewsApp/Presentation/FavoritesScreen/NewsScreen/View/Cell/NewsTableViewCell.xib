@@ -16,20 +16,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="357" height="223"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-0n-IWc">
+                        <rect key="frame" x="168.5" y="101.5" width="20" height="20"/>
+                    </activityIndicatorView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="6Qg-6B-UHv">
-                        <rect key="frame" x="0.0" y="10" width="357" height="203"/>
+                        <rect key="frame" x="10" y="10" width="337" height="203"/>
                     </imageView>
-                    <view alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" translatesAutoresizingMaskIntoConstraints="NO" id="OiT-0z-mO7">
-                        <rect key="frame" x="0.0" y="138.5" width="357" height="74.5"/>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" translatesAutoresizingMaskIntoConstraints="NO" id="OiT-0z-mO7">
+                        <rect key="frame" x="10" y="138.5" width="337" height="74.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="759" verticalCompressionResistancePriority="759" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmT-sp-437">
-                                <rect key="frame" x="10" y="10" width="337" height="24"/>
+                                <rect key="frame" x="10" y="10" width="317" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelljldjlaj" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDz-aQ-aOO">
-                                <rect key="frame" x="10" y="44" width="337" height="20.5"/>
+                                <rect key="frame" x="10" y="44" width="317" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -49,17 +52,21 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="6Qg-6B-UHv" secondAttribute="bottom" constant="10" id="3vi-1r-5X4"/>
+                    <constraint firstItem="GgK-0n-IWc" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="64X-ah-POD"/>
+                    <constraint firstItem="GgK-0n-IWc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A9d-u0-PIZ"/>
                     <constraint firstItem="OiT-0z-mO7" firstAttribute="leading" secondItem="6Qg-6B-UHv" secondAttribute="leading" id="Cjg-ft-vGc"/>
                     <constraint firstItem="6Qg-6B-UHv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="GpV-tw-tsg"/>
-                    <constraint firstItem="6Qg-6B-UHv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JSO-wx-0Ak"/>
+                    <constraint firstItem="6Qg-6B-UHv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="JSO-wx-0Ak"/>
                     <constraint firstItem="6Qg-6B-UHv" firstAttribute="bottom" secondItem="OiT-0z-mO7" secondAttribute="bottom" id="VGk-Dt-wdP"/>
-                    <constraint firstAttribute="trailing" secondItem="6Qg-6B-UHv" secondAttribute="trailing" id="gla-pG-M1P"/>
+                    <constraint firstAttribute="trailing" secondItem="6Qg-6B-UHv" secondAttribute="trailing" constant="10" id="gla-pG-M1P"/>
                     <constraint firstItem="OiT-0z-mO7" firstAttribute="trailing" secondItem="6Qg-6B-UHv" secondAttribute="trailing" id="vOY-ed-VN6"/>
                     <constraint firstItem="6Qg-6B-UHv" firstAttribute="trailing" secondItem="OiT-0z-mO7" secondAttribute="trailing" id="zOO-3y-TBa"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="GgK-0n-IWc" id="P9z-qs-2eK"/>
+                <outlet property="container" destination="OiT-0z-mO7" id="897-pc-ZSu"/>
                 <outlet property="newsItemDescriptionLabel" destination="sDz-aQ-aOO" id="fVO-fs-TEY"/>
                 <outlet property="newsItemImageView" destination="6Qg-6B-UHv" id="Ixm-jd-79X"/>
                 <outlet property="newsItemTitleLabel" destination="tmT-sp-437" id="hhs-sY-DdV"/>
