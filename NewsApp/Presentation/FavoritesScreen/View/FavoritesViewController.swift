@@ -15,7 +15,6 @@ class FavoritesViewController: UIViewController, FavoritesViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         output = FavoritesPresenter(self)
-        displayManager = FavoritesDisplayManager(tableView)
         output.viewIsReady()
     }
     
@@ -25,7 +24,7 @@ class FavoritesViewController: UIViewController, FavoritesViewInput {
     }
     
     func setupInitialState() {
-        
+        displayManager = FavoritesDisplayManager(tableView)
     }
     
     func update(_ channels: [Channel]) {

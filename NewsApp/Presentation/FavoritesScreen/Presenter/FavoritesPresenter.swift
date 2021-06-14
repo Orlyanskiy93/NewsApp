@@ -8,12 +8,12 @@
 import Foundation
 
 class FavoritesPresenter: FavoritesViewOutput {
-    private var view: FavoritesViewInput!
-    private var newsService: NewsService!
+    private weak var view: FavoritesViewInput!
+    private var dataService: DataService!
     
     init(_ view: FavoritesViewInput) {
         self.view = view
-        newsService = NewsServiceImp.shared
+        dataService = DataServiceImp.shared
     }
     
     func viewIsReady() {
@@ -21,6 +21,7 @@ class FavoritesPresenter: FavoritesViewOutput {
     }
     
     func updateView() {
-        view.update(newsService.favoriteChannels)
+        let favorites = dataService.favoriteChannels
+        view.update(favorites)
     }
 }

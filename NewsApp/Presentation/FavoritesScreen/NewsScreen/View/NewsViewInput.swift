@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NewsViewInput: AnyObject {
+protocol NewsViewInput: AnyObject, UIViewInput {
     func setupInitialState()
     func update(_ news: [NewsItem])
 }

@@ -9,27 +9,26 @@ import Foundation
 
 class NewsPresenter: NewsViewOutput {
     private weak var view: NewsViewInput!
-    private var newsService: NewsService!
+    private var dataService: DataService!
     
     init(_ view: NewsViewInput) {
         self.view = view
-        newsService = NewsServiceImp.shared
+        dataService = DataServiceImp.shared
     }
     
     func viewIsReady() {
         view.setupInitialState()
-        let news = loadNews()
-        view.update(news)
+        loadNews()
     }
     
-    func loadNews() -> [NewsItem] {
-        let favoriteChannels = newsService.favoriteChannels
+    func loadNews() {
+        let favoriteChannels = dataService.favoriteChannels
         var news = [NewsItem]()
         
         favoriteChannels.forEach { channel in
             news.append(contentsOf: channel.news)
         }
         
-        return news
+        view.update(news)
     }
 }

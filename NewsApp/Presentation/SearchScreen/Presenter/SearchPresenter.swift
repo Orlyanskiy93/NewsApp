@@ -9,13 +9,13 @@ import Foundation
 
 class SearchPresenter: SearchViewOutput {
     private weak var view: SearchViewInput!
-    private var newsService: NewsService!
+    private var dataService: DataService!
     private var news: [NewsItem] = []
     private var filteredNews: [NewsItem] = []
     
     init(_ view: SearchViewInput) {
         self.view = view
-        newsService = NewsServiceImp.shared
+        dataService = DataServiceImp.shared
     }
     
     func viewIsReady() {
@@ -24,13 +24,11 @@ class SearchPresenter: SearchViewOutput {
     }
     
     func loadNews() -> [NewsItem] {
-        let allChannels = newsService.allChannels
         var news = [NewsItem]()
-        
+        let allChannels = dataService.allChannels
         allChannels.forEach { channel in
             news.append(contentsOf: channel.news)
         }
-        
         return news
     }
     

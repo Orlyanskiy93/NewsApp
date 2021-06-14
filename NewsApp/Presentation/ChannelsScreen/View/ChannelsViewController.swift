@@ -23,7 +23,11 @@ class ChannelsViewController: UIViewController, ChannelsViewInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        displayManager.reloadData()
+        updateView()
+    }
+
+    func updateView() {
+        output.loadNews()
     }
     
     func setupInitialState() {

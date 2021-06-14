@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FavoritesViewInput {
+protocol FavoritesViewInput: AnyObject, UIViewInput {
     func setupInitialState()
     func update(_ channels: [Channel])
 }

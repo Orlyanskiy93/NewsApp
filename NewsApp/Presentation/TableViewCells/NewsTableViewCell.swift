@@ -17,6 +17,7 @@ class NewsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         newsItemImageView.layer.cornerRadius = 30
         container.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         container.layer.cornerRadius = 30

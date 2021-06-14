@@ -8,5 +8,5 @@
 import UIKit
 
 protocol FavoritesCellDisplayManager {
-    func delete(_ cell: UITableViewCell)
+    func removeFromFavorites(_ cell: UITableViewCell)
 }

@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-struct NewsDataItem: ImmutableMappable {
+struct NewsApiResponseItem: ImmutableMappable {
     var source: String
     var title: String
     var description: String?

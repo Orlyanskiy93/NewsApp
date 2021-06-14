@@ -10,10 +10,8 @@ import Alamofire
 import ObjectMapper
 import PromiseKit
 
-class NewsServiceImp: NewsService {
-    static let shared = NewsServiceImp()
-    var allChannels: [Channel] = []
-    var favoriteChannels: [Channel] = []
+class NewsApiServiceImp: NewsApiService {
+    static let shared = NewsApiServiceImp()
     
     private init() {}
     
@@ -30,23 +28,24 @@ class NewsServiceImp: NewsService {
                         return
                     }
                     do {
-                        var newsData = try Mapper<NewsDataItem>().mapArray(JSONObject: array)
-                        var channels = [Channel]()
-                        var news = [NewsItem]()
-
+                        // Mapping response data
+                        var newsData = try Mapper<NewsApiResponseItem>().mapArray(JSONObject: array)
+                        
+                        // Creating channels
                         newsData.sort { $0.source < $1.source }
-                        var channelTitle = newsData.first!.source
-                        newsData.forEach { item in
-                            if item.source == channelTitle {
-                                news.append(NewsItem(title: item.title, description: item.description, imageUrlString: item.imageUrlString))
+                        var channels = [Channel]()
+                        newsData.forEach { newsDataItem in
+                            let newsItem = NewsItem(title: newsDataItem.title, description: newsDataItem.description, imageUrlString: newsDataItem.imageUrlString)
+                            
+                            if let index = channels.firstIndex(where: { channel in
+                                return channel.title == newsDataItem.source
+                            }) {
+                                channels[index].news.append(newsItem)
                             } else {
-                                let channel = Channel(title: channelTitle, news: news)
+                                let channel = Channel(isFavorte: false, title: newsDataItem.source, news: [newsItem])
                                 channels.append(channel)
-                                news = []
-                                channelTitle = item.source
                             }
                         }
-                        self.allChannels = channels
                         seal.fulfill(channels)
                     } catch {
                         seal.reject(error)
@@ -56,18 +55,5 @@ class NewsServiceImp: NewsService {
                 }
             }
         }
-    }
-    func addToFavorites(_ chanel: Channel) {
-        guard favoriteChannels.contains(where: { $0.title == chanel.title }) else {
-            favoriteChannels.append(chanel)
-            return
-        }
-    }
-    
-    func removeFromFavorites(_ chanel: Channel) {
-        guard let index = favoriteChannels.firstIndex(where: { $0.title == chanel.title }) else {
-            return
-        }
-        favoriteChannels.remove(at: index)
     }
 }

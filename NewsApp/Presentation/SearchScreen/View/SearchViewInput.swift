@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SearchViewInput: AnyObject {
+protocol SearchViewInput: AnyObject, UIViewInput {
     func setupInitialState()
     func update(_ news: [NewsItem])
 }

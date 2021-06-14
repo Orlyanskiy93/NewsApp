@@ -27,11 +27,7 @@ class ChannelsDisplayManager: NSObject, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-    }
-    
-    func reloadData() {
-        tableView.reloadData()
-    }
+    }    
 }
 
 extension ChannelsDisplayManager: UITextViewDelegate, UITableViewDataSource {

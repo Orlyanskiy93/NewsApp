@@ -15,12 +15,11 @@ class NewsViewController: UIViewController, NewsViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         output = NewsPresenter(self)
-        displayManager = NewsDisplayManager(tableView)
         output.viewIsReady()
     }
     
     func setupInitialState() {
-        
+        displayManager = NewsDisplayManager(tableView)
     }
     
     func update(_ news: [NewsItem]) {

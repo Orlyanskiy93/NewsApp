@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesDisplayManager: NSObject, DisplayManager {
+class FavoritesDisplayManager: NSObject, FavoritesCellDisplayManager {
     var tableView: UITableView!
     var favoriteChannels: [Channel] = []
     {
@@ -29,7 +29,7 @@ class FavoritesDisplayManager: NSObject, DisplayManager {
         tableView.separatorStyle = .none
     }
     
-    func delete(_ cell: UITableViewCell) {
+    func removeFromFavorites(_ cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
@@ -52,7 +52,7 @@ extension FavoritesDisplayManager: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChannelsTableViewCell.identifier()) as! ChannelsTableViewCell
-        cell.sourceDisplayManager = self
+        cell.favoritesCellDisplayManager = self
         let channel = favoriteChannels[indexPath.row]
         cell.fill(with: channel)
         return cell

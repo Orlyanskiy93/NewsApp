@@ -7,16 +7,14 @@
 
 import UIKit
 
-class ChannelsTableViewCell: UITableViewCell {
+class ChannelsTableViewCell: UITableViewCell, UIViewInput {
     @IBOutlet weak var favoritesImageView: UIImageView!
     
-    var sourceDisplayManager: DisplayManager?
+    var favoritesCellDisplayManager: FavoritesCellDisplayManager?
     private var channel: Channel!
-    private var newsService: NewsService!
+    private var dataService: DataService!
     private var starImage: UIImage = UIImage(systemName: "star") ?? UIImage()
     private var starFillImage: UIImage = UIImage(systemName: "star.fill") ?? UIImage()
-
-    
     
     @IBOutlet weak var channelTitleLabel: UILabel!
     
@@ -26,7 +24,7 @@ class ChannelsTableViewCell: UITableViewCell {
     }
     
     private func setup() {
-        newsService = NewsServiceImp.shared
+        dataService = DataServiceImp.shared
         self.selectionStyle = .none
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(favoritesSetup))
@@ -44,13 +42,21 @@ class ChannelsTableViewCell: UITableViewCell {
     @objc func favoritesSetup() {
         if channel.isFavorte {
             channel.isFavorte = false
-            newsService.removeFromFavorites(channel)
             favoritesImageView.image = starImage
-            sourceDisplayManager?.delete(self)
+            favoritesCellDisplayManager?.removeFromFavorites(self)
+            do {
+                try dataService.removeFromFavorites(channel)
+            } catch {
+                show(error)
+            }
         } else {
             channel.isFavorte = true
-            newsService.addToFavorites(channel)
             favoritesImageView.image = starFillImage
+            do {
+                try dataService.addToFavorites(channel)
+            } catch {
+                show(error)
+            }
         }
     }
 }

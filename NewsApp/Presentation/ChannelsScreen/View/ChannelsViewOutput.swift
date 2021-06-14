@@ -9,4 +9,5 @@ import Foundation
 
 protocol ChannelsViewOutput {
     func viewIsReady()
+    func loadNews()
 }
