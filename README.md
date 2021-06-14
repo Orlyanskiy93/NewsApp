@@ -2,7 +2,7 @@
 
 The app present news from https://newsapi.org using its API.
 
- Architecture: MVp
+ Architecture: MVP
  
  libraries: Foundation, UIKit, CoreData
  
