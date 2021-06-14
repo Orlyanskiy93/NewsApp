@@ -50,7 +50,9 @@ class ChannelsPresenter: ChannelsViewOutput {
                 self.view.stopLoading()
             }
         } .catch { [weak self] error in
-            self?.view.show(error) { [weak self] _ in
+            let title = "No access to the Internet"
+            let message = "The latest downloaded data will be displayed"
+            self?.view.show(title: title, message: message) { [weak self] _ in
                 if let self = self {
                     let channels = self.dataService.allChannels
                     self.view.update(channels)
