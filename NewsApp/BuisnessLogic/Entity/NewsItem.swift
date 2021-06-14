@@ -8,8 +8,7 @@
 import Foundation
 
 struct NewsItem {
-    var source: String
     var title: String
-    var description: String
-    var imageUrlString: String
+    var description: String?
+    var imageUrlString: String?
 }
